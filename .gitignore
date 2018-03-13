@@ -1,0 +1,9 @@
+*.pyc
+*.py~
+*DS_Store
+.serverless/*
+*/.serverless/*
+*/node_modules/*
+service/node_modules/*
+*.js
+*.sql
