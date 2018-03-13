@@ -1,0 +1,30 @@
+service: oil-price-stream-python3-service
+
+provider:
+  name: aws
+  runtime: python3.6
+  iamRoleStatements:
+    -  Effect: "Allow"
+       Action:
+         - "s3:ListBucket"
+       Resource: "arn:aws:s3:::daily-oil-price"
+
+    -  Effect: "Allow"
+       Action:
+         - "s3:PutObject"
+       Resource: "arn:aws:s3:::daily-oil-price/*"
+
+functions:
+  price:
+    handler: price_handler.get_price
+    description: "Crawl https://oilprice.com/ home page for price streams (daily)."
+    name: oilPriceStream
+    events:
+      - schedule: cron(0 6 * * ? *)
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux

@@ -1,0 +1,11 @@
+service: oil-price-stream-s3
+
+provider:
+  name: aws
+  
+resources:
+  Resources:
+    NewRcesource:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: daily-oil-price
